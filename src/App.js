@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import "./App.css";
 import Header from "./Header";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 function App(props) {
   const [weatherData, setWeatherData] = useState({});
   const [ready, setReady] = useState(false);
 
   function handleResponse(response) {
-    console.log(response.data);
     setWeatherData({
-      temperature: response.data.main.temp,
+      temperature: Math.round(response.data.main.temp),
       city: response.data.name,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       icon: "http://openweathermap.org/img/wn/10d@2x.png",
       description: response.data.weather[0].description,
-      date: "Monday 1:00",
+      date: new Date(response.data.dt * 1000),
     });
     setReady(true);
   }
@@ -42,19 +42,24 @@ function App(props) {
           <div className="weather-summary">
             <div className="weather-summary-header pb-4">
               <h1>{weatherData.city}</h1>
-              <div className="weather-detail-text">{weatherData.date}</div>
+              <div className="weather-detail-text">
+                <FormattedDate date={weatherData.date} />
+              </div>
               <div className="weather-detail-text">Clouds</div>
               <div className="row">
                 <div className="col-sm-6">
                   <div className="clearfix">
-                    <div className="weather-icon">
+                    <div className="weather-icon float-left">
                       <img
                         src={weatherData.icon}
                         alt={weatherData.description}
                       />
                     </div>
-                    <div className="weather-temp weather-temp-today">
-                      {weatherData.temperature} C
+                    <div className="weather-temp">
+                      <span className="weather-temp-today">
+                        {weatherData.temperature}
+                      </span>{" "}
+                      <span className="units">C</span>
                     </div>
                   </div>
                 </div>
@@ -66,7 +71,7 @@ function App(props) {
                     Wind: {weatherData.wind} km/hour
                   </div>
                   <div className="weather-detail">
-                    Humidity: {weatherData.humidity}
+                    Humidity: {weatherData.humidity}%
                   </div>
                 </div>
               </div>
