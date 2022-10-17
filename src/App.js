@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import Header from "./Header";
 import axios from "axios";
-import WeatherIcon from "react-icons-weather";
 
 function App(props) {
   const [weatherData, setWeatherData] = useState({});
