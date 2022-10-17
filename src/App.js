@@ -48,7 +48,10 @@ function App(props) {
                 <div className="col-sm-6">
                   <div className="clearfix">
                     <div className="weather-icon">
-                      <img src={weatherData.icon} />
+                      <img
+                        src={weatherData.icon}
+                        alt={weatherData.description}
+                      />
                     </div>
                     <div className="weather-temp weather-temp-today">
                       {weatherData.temperature} C
