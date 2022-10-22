@@ -9,7 +9,7 @@ import Footer from "./Footer";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div className="container">
-    <App defaultCity="Kiev" />
+    <App defaultCity="Batumi" />
     <Footer />
   </div>
 );
