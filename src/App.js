@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./Header";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 function App(props) {
   const [weatherData, setWeatherData] = useState({});
@@ -10,17 +11,17 @@ function App(props) {
   const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
-    console.log(response.data);
-    console.log(response.data.weather[0].icon);
+    console.log(response.data.coord);
     setWeatherData({
       temperature: Math.round(response.data.main.temp),
       city: response.data.name,
+      coord: response.data.coord,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
-
       description: response.data.weather[0].description,
       date: new Date(response.data.dt * 1000),
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      coord: response.data.coord,
     });
     setReady(true);
   }
@@ -61,35 +62,7 @@ function App(props) {
           </div>
           <WeatherInfo data={weatherData} />
 
-          <div className="row">
-            <div className="col-sm-2">
-              <div className="forecast-day">Mon</div>
-              <div className="forecast-icon">24</div>
-              <div className="forecast-temperature">23</div>
-            </div>
-            <div className="col-sm-2">
-              <div className="forecast-day">Tue</div>
-              <div className="forecast-icon">24</div>
-              <div className="forecast-temperature">24</div>
-            </div>
-            <div className="col-sm-2">
-              {" "}
-              <div className="forecast-day">Wed</div>
-              <div className="forecast-icon">23</div>
-              <div className="forecast-temperature">23</div>
-            </div>
-            <div className="col-sm-2">
-              <div className="forecast-day">Thu</div>
-              <div className="forecast-icon">23</div>
-              <div className="forecast-temperature">23</div>
-            </div>
-            <div className="col-sm-2">
-              {" "}
-              <div className="forecast-day">Fri</div>
-              <div className="forecast-icon">23</div>
-              <div className="forecast-temperature">23</div>
-            </div>
-          </div>
+          <WeatherForecast coordinates={weatherData.coord} />
         </div>
       </div>
     );
