@@ -8,31 +8,32 @@ export default function WeatherForecast(props) {
   const [ready, setReady] = useState(false);
 
   function getForecastDaily(response) {
-    console.log(response.data.list[0].main.temp_min);
-    console.log(response.data.list[0].weather[0].icon);
-    setForecast(response.data.list);
+    console.log(response.data.daily);
+    console.log(response.data.daily[0].temp.max);
+    setForecast(response.data.daily);
     setReady(true);
-  }
-  function day() {
-    let date = new Date(forecast[0].dt * 1000);
-    let day = date.getDay();
-
-    let days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
-
-    return days[day];
   }
 
   if (ready) {
     return (
       <div className="row WeatherForecast">
-        <WeatherForecastDay data={forecast[0]} />
+        {forecast.map(function (dailyForecast, index) {
+          if (index < 5) {
+            return (
+              <div className="col" key={index}>
+                {index}
+                <WeatherForecastDay data={dailyForecast} />
+              </div>
+            );
+          }
+        })}
       </div>
     );
   } else {
-    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    const apiKey = "3c45b88d00cd4824a17999c2d614d01c";
     const latitude = props.coordinates.lat;
     const longitude = props.coordinates.lon;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(getForecastDaily);
 
     return null;

@@ -11,7 +11,6 @@ function App(props) {
   const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
-    console.log(response.data.coord);
     setWeatherData({
       temperature: Math.round(response.data.main.temp),
       city: response.data.name,
