@@ -54,9 +54,6 @@ function App(props) {
                 onChange={handleCityChange}
               />
               <input type="submit" className="btn btn-primary" value="Search" />
-              <button className="float-right btn btn-success">
-                Current location
-              </button>
             </form>
           </div>
           <WeatherInfo data={weatherData} />
