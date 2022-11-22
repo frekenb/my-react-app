@@ -9,15 +9,15 @@ export default function WeatherInfo(props) {
   return (
     <div className="WeatherInfo">
       <div className="row">
-        <div className="col col-md-4 col-sm-4">
+        <div className="col col-md-4 col-sm-6">
           <div className="weather-icon float-right">
             <Icon data={props.data.icon} />
           </div>
         </div>
-        <div className="col col-md-4 col-sm-4 temperature-info">
+        <div className="col col-md-4 col-sm-6 temperature-info">
           <WeatherUnits celsius={props.data.temperature} />
         </div>
-        <div className="col col-md-4 col-sm-4 weather-detail ">
+        <div className="col col-md-4 col-sm-6 weather-detail ">
           <div className="wind-information">
             <WiStrongWind style={{ fontSize: "30px", color: "#A9CCE3" }} />{" "}
             <span className="fs-5 imp-inf">{props.data.wind}</span>
