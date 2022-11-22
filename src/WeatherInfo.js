@@ -1,35 +1,35 @@
 import React from "react";
-import FormattedDate from "./FormattedDate";
+import { WiStrongWind, WiSprinkle } from "react-icons/wi";
+import { SunInformation } from "./SunInformation";
+import { Icon } from "./Icon";
 import WeatherUnits from "./WeatherUnits";
+import "./WeatherInfo.css";
 
 export default function WeatherInfo(props) {
   return (
-    <div className="weather-summary">
-      <div className="weather-summary-header pb-4">
-        <h1>{props.data.city}</h1>
-        <div className="weather-detail-text">
-          <FormattedDate date={props.data.date} />
-        </div>
-        <div className="weather-detail-text">{props.data.description}</div>
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="clearfix">
-              <div className="weather-icon float-left">
-                <img src={props.data.icon} alt={props.data.description} />
-              </div>
-              <WeatherUnits celsius={props.data.temperature} />
-            </div>
+    <div className="WeatherInfo">
+      <div className="row">
+        <div className="col col-md-4 col-sm-4">
+          <div className="weather-icon float-right">
+            <Icon data={props.data.icon} />
           </div>
-          <div className="col-sm-6">
-            <div className="weather-detail">
-              Precipitation: {props.data.precipitation}
-            </div>
-            <div className="weather-detail">
-              Wind: {props.data.wind} km/hour
-            </div>
-            <div className="weather-detail">
-              Humidity: {props.data.humidity}%
-            </div>
+        </div>
+        <div className="col col-md-4 col-sm-4 temperature-info">
+          <WeatherUnits celsius={props.data.temperature} />
+        </div>
+        <div className="col col-md-4 col-sm-4 weather-detail ">
+          <div className="wind-information">
+            <WiStrongWind style={{ fontSize: "30px", color: "#A9CCE3" }} />{" "}
+            <span className="fs-5 imp-inf">{props.data.wind}</span>
+            <span className="unit-weather-detail fs-6"> km/hour</span>
+          </div>
+          <div className="humidity-information fs-5">
+            <WiSprinkle style={{ fontSize: "30px", color: "#AED6F1" }} />{" "}
+            {props.data.humidity}
+            <span className="unit-weather-detail fs-6"> %</span>
+          </div>
+          <div className="sun-information fs-5">
+            <SunInformation sun={props.data} />
           </div>
         </div>
       </div>

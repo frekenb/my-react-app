@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { WiCelsius, WiFahrenheit } from "react-icons/wi";
+
+import "./WeatherUnits.css";
 
 export default function WeatherUnits(props) {
   const [unit, setUnit] = useState("metrics");
@@ -15,27 +18,27 @@ export default function WeatherUnits(props) {
 
   if (unit === "celsius") {
     return (
-      <div className="weather-temp">
-        <span className="weather-temp-today">{Math.round(props.celsius)}</span>{" "}
-        <span className="units">
-          ℃ |{" "}
+      <div className="WeatherUnits">
+        <div className="weather-temp-today">{Math.round(props.celsius)}</div>{" "}
+        <div className="units">
+          <WiCelsius style={{ fontSize: "35px", color: "#black" }} />/
           <a href="/" onClick={convertToFarenhait}>
-            ℉
+            <WiFahrenheit style={{ fontSize: "35px", color: "bababa" }} />
           </a>
-        </span>
+        </div>
       </div>
     );
   } else {
     let farenheit = (Math.round(props.celsius) * 9) / 5 + 32;
     return (
-      <div className="weather-temp">
-        <span className="weather-temp-today">{Math.round(farenheit)}</span>{" "}
-        <span className="units">
+      <div className="WeatherUnits">
+        <div className="weather-temp-today">{Math.round(farenheit)}</div>{" "}
+        <div className="units">
           <a href="/" onClick={showCelsius}>
-            ℃
-          </a>{" "}
-          | ℉
-        </span>
+            <WiCelsius style={{ fontSize: "35px", color: "bababa" }} />
+          </a>
+          /<WiFahrenheit style={{ fontSize: "35px", color: "#black" }} />
+        </div>
       </div>
     );
   }

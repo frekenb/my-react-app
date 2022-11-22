@@ -23,10 +23,31 @@ export default function IconForecast(props) {
     "50n": "FOG",
   };
 
+  const colors = {
+    "01d": "#F9E79F",
+    "01n": "#D6DBDF",
+    "02d": "#F9E79F",
+    "02n": "#E5E7E9",
+    "03d": "#F9E79F",
+    "03n": "#E5E7E9",
+    "04d": "#CCD1D1",
+    "04n": "#AEB6BF",
+    "09d": "#CCD1D1",
+    "09n": "#AEB6BF",
+    "10d": "#AED6F1",
+    "10n": "#D4E6F1",
+    "11d": "#AED6F1",
+    "11n": "#D4E6F1",
+    "13d": "#D6DBDF",
+    "13n": "#D6DBDF",
+    "50d": "#D5D8DC",
+    "50n": "#D5D8DC",
+  };
+
   return (
     <ReactAnimatedWeather
       icon={codeMapping[props.code]}
-      color="#1e1e1e"
+      color={colors[props.code]}
       size={props.size}
       animate={true}
     />

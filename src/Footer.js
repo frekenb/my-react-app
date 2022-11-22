@@ -1,8 +1,9 @@
 import React from "react";
+import "./Footer.css";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="Footer">
       This project was coded by Maryna Dmytryk and is{" "}
       <a href="https://github.com/frekenb/my-react-app">
         {" "}

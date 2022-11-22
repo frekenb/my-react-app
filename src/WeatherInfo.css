@@ -1,0 +1,26 @@
+.WeatherInfo {
+  margin: 1rem;
+}
+
+.WeatherInfo .row {
+  align-items: center;
+}
+
+.WeatherInfo .row .weather-icon {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.WeatherInfo .row .temperature-info {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.WeatherInfo .row .WeatherInfo .row .weather-detail {
+  text-align: left;
+
+  color: #626567aa;
+}
+.WeatherInfo .row .weather-detail div.unit-weather-detail {
+  font-size: 10px !important;
+}

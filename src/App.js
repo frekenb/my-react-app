@@ -1,25 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-import Header from "./Header";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
+import Footer from "./Footer";
 
 function App(props) {
   const [weatherData, setWeatherData] = useState({});
   const [ready, setReady] = useState(false);
   const [city, setCity] = useState(props.defaultCity);
+  const [input, setInput] = useState("");
+  const [spanWidth, setSpanWidth] = useState(40);
+  const spanEl = useRef(null);
+
+  useEffect(() => {
+    if (input.length > 0) {
+      setSpanWidth(spanEl.current.offsetWidth);
+    }
+  }, [input]);
 
   function handleResponse(response) {
     setWeatherData({
       temperature: Math.round(response.data.main.temp),
       city: response.data.name,
       coord: response.data.coord,
-      wind: response.data.wind.speed,
+      wind: Math.round(response.data.wind.speed),
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
       date: new Date(response.data.dt * 1000),
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      sunrise: new Date(response.data.sys.sunrise * 1000),
+      sunset: new Date(response.data.sys.sunset * 1000),
+      icon: response.data.weather[0].icon,
       coordinates: response.data.coord,
     });
     setReady(true);
@@ -38,28 +49,40 @@ function App(props) {
 
   function handleCityChange(event) {
     setCity(event.target.value);
+    setInput(event.target.value);
   }
 
   if (ready) {
     return (
-      <div className="app-container">
-        <Header />
-        <div className="main-app-part container">
-          <div className="clearfix">
-            <form className="float-left" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Enter a city..."
-                autoComplete="off"
-                onChange={handleCityChange}
-              />
-              <input type="submit" className="btn btn-primary" value="Search" />
-            </form>
-          </div>
-          <WeatherInfo data={weatherData} />
+      <div className="App">
+        <div className="app-container ">
+          <div className="container">
+            <div className="clearfix">
+              <form className="" onSubmit={handleSubmit}>
+                Right now in{" "}
+                <span className="hide" ref={spanEl}>
+                  {input}
+                </span>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder=""
+                  autoComplete="off"
+                  onChange={handleCityChange}
+                  style={{ width: spanWidth + "px" }}
+                />
+                , it's{" "}
+                <span className="weather-description">
+                  {weatherData.description}
+                </span>
+              </form>
+            </div>
+            <WeatherInfo data={weatherData} />
 
-          <WeatherForecast coordinates={weatherData.coordinates} />
+            <WeatherForecast coordinates={weatherData.coordinates} />
+          </div>
         </div>
+        <Footer className="fixed-bottom" />
       </div>
     );
   } else {

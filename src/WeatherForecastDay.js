@@ -20,8 +20,9 @@ export default function WeatherForecastDay(props) {
         <span className="WeatherForecast-temperature-max">
           {Math.round(props.data.temp.max)}º
         </span>
+
         <span className="WeatherForecast-temperature-min">
-          {Math.round(props.data.temp.min)}º
+          /{Math.round(props.data.temp.min)}º
         </span>
       </div>
     </div>

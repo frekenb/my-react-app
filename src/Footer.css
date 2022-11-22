@@ -1,0 +1,12 @@
+.Footer {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 16px;
+  color: #7b7d7d;
+}
+
+.Footer a {
+  text-decoration: none;
+  color: #aed6f1;
+}
